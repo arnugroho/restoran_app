@@ -19,6 +19,10 @@ class ApiService {
     return _baseUrl + 'images/small/' + url;
   }
 
+  static String pathMediumImg(url) {
+    return _baseUrl + 'images/medium/' + url;
+  }
+
   Future<RestaurantDetail> restaurantsDetail(idRestaurant) async {
     final response = await http.get(_baseUrl + "detail/" + idRestaurant);
     if (response.statusCode == 200) {

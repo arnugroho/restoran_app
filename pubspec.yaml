@@ -21,6 +21,8 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  path: ^1.8.0-nullsafety
+  process: ^4.0.0-nullsafety
   flutter:
     sdk: flutter
 
@@ -82,5 +84,4 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
   assets:
-    - assets/data_restoran.json
     - assets/images/restoran_splash.jpeg
