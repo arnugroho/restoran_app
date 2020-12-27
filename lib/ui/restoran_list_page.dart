@@ -1,99 +1,66 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:restoran_app_dicoding/data/model/restoran.dart';
-
-import 'detail_restoran.dart';
+import 'package:provider/provider.dart';
+import 'package:restoran_app_dicoding/common/enum_data.dart';
+import 'package:restoran_app_dicoding/provider/restaurant_provider.dart';
+import 'package:restoran_app_dicoding/widgets/card_list_restaurant.dart';
+import 'package:restoran_app_dicoding/widgets/platform_widget.dart';
 
 class RestoranListPage extends StatelessWidget {
+  static const String title = 'List';
   static const routeName = '/restoran_list';
+
+  Widget _buildList() {
+    return Consumer<RestaurantProvider>(
+      builder: (context, state, _) {
+        if (state.state == ResultState.Loading) {
+          return Center(child: CircularProgressIndicator());
+        } else if (state.state == ResultState.HasData) {
+          return ListView.builder(
+            shrinkWrap: true,
+            itemCount: state.result.restaurants.length,
+            itemBuilder: (context, index) {
+              var restaurant = state.result.restaurants[index];
+              return CardListRestaurant(restoran: restaurant);
+            },
+          );
+        } else if (state.state == ResultState.NoData) {
+          return Center(child: Text(state.message));
+        } else if (state.state == ResultState.Error) {
+          return Center(child: Text(state.message));
+        } else {
+          return Center(child: Text(''));
+        }
+      },
+    );
+  }
+
+  Widget _buildAndroid(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Restaurant App'),
+      ),
+      body: _buildList(),
+    );
+  }
+
+  Widget _buildIos(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text('Restaurant App'),
+        transitionBetweenRoutes: false,
+      ),
+      child: _buildList(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Restoran App'),
-      ),
-      body: FutureBuilder<String>(
-        future: DefaultAssetBundle.of(context)
-            .loadString('assets/data_restoran.json'),
-        builder: (context, snapshot) {
-          final List<Restoran> restaurants = parseArticles(snapshot.data);
-          return ListView.builder(
-            itemCount: restaurants.length,
-            itemBuilder: (context, index) {
-              return _buildRestoranItem(context, restaurants[index]);
-            },
-          );
-        },
-      ),
+    return PlatformWidget(
+      androidBuilder: _buildAndroid,
+      iosBuilder: _buildIos,
     );
   }
-}
-
-Widget _buildRestoranItem(BuildContext context, Restoran restoran) {
-  return Card(
-    clipBehavior: Clip.antiAlias,
-    child: Column(
-      children: [
-        Center(
-          child: ListTile(
-            leading: Hero(
-                tag: restoran.pictureId,
-                child: (Image.network(
-                  restoran.pictureId,
-                  width: 100,
-                ))),
-            title: Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: Text(restoran.name),
-            ),
-            subtitle:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(2.0, 0, 0, 0),
-                child: RichText(
-                  text: TextSpan(
-                    style: DefaultTextStyle.of(context).style,
-                    children: [
-                      WidgetSpan(
-                        child: Row(
-                          children: [
-                            Icon(Icons.add_location, size: 14),
-                            Text(restoran.city)
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(2.0, 8.0, 0, 4),
-                child: RichText(
-                  text: TextSpan(
-                    style: DefaultTextStyle.of(context).style,
-                    children: [
-                      WidgetSpan(
-                        child: Row(
-                          children: [
-                            Icon(Icons.star, size: 14),
-                            Text(restoran.rating.toString())
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ]),
-            onTap: () {
-              Navigator.pushNamed(context, RestoranDetailPage.routeName,
-                  arguments: restoran);
-            },
-          ),
-        ),
-      ],
-    ),
-  );
 }
 
 

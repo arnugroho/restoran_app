@@ -1,6 +1,7 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:restoran_app_dicoding/ui/restoran_list_page.dart';
+import 'package:restoran_app_dicoding/ui/home_page.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routeName = '/splash_screen';
@@ -30,7 +31,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPage() {
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => RestoranListPage()));
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (BuildContext context) => HomePage()));
   }
 
   @override

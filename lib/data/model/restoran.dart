@@ -14,8 +14,7 @@ class Restoran {
       this.pictureId,
       this.city,
       this.rating,
-      this.menus
-      });
+      this.menus});
 
   Restoran.fromJson(Map<String, dynamic> restoran) {
     id = restoran['id'];
@@ -24,7 +23,8 @@ class Restoran {
     pictureId = restoran['pictureId'];
     city = restoran['city'];
     rating = restoran['rating'];
-    menus = restoran['menus'] != null ? Menus.fromJson(restoran['menus']) : null;
+    menus =
+        restoran['menus'] != null ? Menus.fromJson(restoran['menus']) : null;
   }
 }
 
@@ -33,5 +33,43 @@ List<Restoran> parseArticles(String json) {
     return [];
   }
   final Map<String, dynamic> restorants = jsonDecode(json);
-  return restorants['restaurants'].map<Restoran>((json) => Restoran.fromJson(json)).toList();
+  return restorants['restaurants']
+      .map<Restoran>((json) => Restoran.fromJson(json))
+      .toList();
+}
+
+// Model untuk list restorants
+class RestaurantsList {
+  RestaurantsList({this.error, this.message, this.count, this.restaurants});
+
+  bool error;
+  String message;
+  int count;
+  List<Restoran> restaurants;
+
+  factory RestaurantsList.fromJson(Map<String, dynamic> json) =>
+      RestaurantsList(
+        error: json["error"],
+        message: json["message"],
+        count: json["count"],
+        restaurants: List<Restoran>.from(
+            json["restaurants"].map((x) => Restoran.fromJson(x))),
+      );
+}
+
+// Model untuk detail restorants
+class RestaurantDetail {
+  bool error;
+  String message;
+  int count;
+  Restoran restaurant;
+
+  RestaurantDetail({this.error, this.message, this.count, this.restaurant});
+
+  factory RestaurantDetail.fromJson(Map<String, dynamic> json) =>
+      RestaurantDetail(
+          error: json["error"],
+          message: json["message"],
+          count: json["count"],
+          restaurant: Restoran.fromJson(json["restaurant"]));
 }
