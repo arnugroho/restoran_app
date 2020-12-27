@@ -3,11 +3,7 @@ import 'dart:convert';
 import 'package:restoran_app_dicoding/data/model/menus.dart';
 
 class Restoran {
-  String id;
-  String name;
-  String description;
-  String pictureId;
-  String city;
+  String id, name, description, pictureId, city;
   num rating;
   Menus menus;
 
@@ -36,10 +32,6 @@ List<Restoran> parseArticles(String json) {
   if (json == null) {
     return [];
   }
-
-
   final Map<String, dynamic> restorants = jsonDecode(json);
-//  final List parsed = restorants.values;
   return restorants['restaurants'].map<Restoran>((json) => Restoran.fromJson(json)).toList();
-  return null;
 }
