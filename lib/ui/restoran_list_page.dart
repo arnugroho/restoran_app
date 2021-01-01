@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,13 +18,27 @@ class RestoranListPage extends StatelessWidget {
         if (state.state == ResultState.Loading) {
           return Center(child: CircularProgressIndicator());
         } else if (state.state == ResultState.HasData) {
-          return ListView.builder(
-            shrinkWrap: true,
-            itemCount: state.result.restaurants.length,
-            itemBuilder: (context, index) {
-              var restaurant = state.result.restaurants[index];
-              return CardListRestaurant(restoran: restaurant);
-            },
+          return Column(
+            children: [
+              TextButton.icon(
+                onPressed: () {
+                  print('Received click');
+                },
+                icon:
+                    Icon(Platform.isIOS ? CupertinoIcons.search : Icons.search),
+                label: Text('Search'),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: state.result.restaurants.length,
+                  itemBuilder: (context, index) {
+                    var restaurant = state.result.restaurants[index];
+                    return CardListRestaurant(restoran: restaurant);
+                  },
+                ),
+              )
+            ],
           );
         } else if (state.state == ResultState.NoData) {
           return Center(child: Text(state.message));
@@ -50,7 +66,7 @@ class RestoranListPage extends StatelessWidget {
         middle: Text('Restaurant App'),
         transitionBetweenRoutes: false,
       ),
-      child: _buildList(),
+      child: SafeArea(child: _buildList()),
     );
   }
 
@@ -62,5 +78,3 @@ class RestoranListPage extends StatelessWidget {
     );
   }
 }
-
-
