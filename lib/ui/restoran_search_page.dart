@@ -4,17 +4,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restoran_app_dicoding/common/enum_data.dart';
-import 'package:restoran_app_dicoding/provider/restaurant_provider.dart';
-import 'package:restoran_app_dicoding/ui/restoran_search_page.dart';
+import 'package:restoran_app_dicoding/provider/restaurant_search_provider.dart';
 import 'package:restoran_app_dicoding/widgets/card_list_restaurant.dart';
 import 'package:restoran_app_dicoding/widgets/platform_widget.dart';
 
-class RestoranListPage extends StatelessWidget {
+class RestoranSearchPage extends StatelessWidget {
   static const String title = 'List';
-  static const routeName = '/restoran_list';
+  static const routeName = '/restoran_search';
 
   Widget _buildList() {
-    return Consumer<RestaurantProvider>(
+    return Consumer<RestaurantSearchProvider>(
       builder: (context, state, _) {
         if (state.state == ResultState.Loading) {
           return Center(child: CircularProgressIndicator());
@@ -23,7 +22,7 @@ class RestoranListPage extends StatelessWidget {
             children: [
               TextButton.icon(
                 onPressed: () {
-                  Navigator.pushNamed(context, RestoranSearchPage.routeName);
+                  print('Received click');
                 },
                 icon:
                     Icon(Platform.isIOS ? CupertinoIcons.search : Icons.search),
@@ -57,7 +56,7 @@ class RestoranListPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Restaurant App'),
       ),
-      body: SafeArea(child: _buildList()),
+      body: _buildList(),
     );
   }
 

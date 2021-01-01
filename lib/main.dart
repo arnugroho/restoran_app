@@ -3,9 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:restoran_app_dicoding/common/styles.dart';
 import 'package:restoran_app_dicoding/data/api/api_service.dart';
 import 'package:restoran_app_dicoding/provider/restaurant_detail_provider.dart';
+import 'package:restoran_app_dicoding/provider/restaurant_search_provider.dart';
 import 'package:restoran_app_dicoding/splash.dart';
 import 'package:restoran_app_dicoding/ui/detail_restoran_page.dart';
 import 'package:restoran_app_dicoding/ui/restoran_list_page.dart';
+import 'package:restoran_app_dicoding/ui/restoran_search_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,15 +29,17 @@ class MyApp extends StatelessWidget {
       routes: {
         SplashScreen.routeName: (context) => SplashScreen(),
         RestoranListPage.routeName: (context) => RestoranListPage(),
-        // RestoranDetailPage.routeName: (context) => RestoranDetailPage(
-        //   idRestaurant: ModalRoute.of(context).settings.arguments,
-        // ),
         RestoranDetailPage.routeName: (context) =>
             ChangeNotifierProvider<RestaurantDetailProvider>(
               create: (_) => RestaurantDetailProvider(
                   apiService: ApiService(),
                   idRestaurant: ModalRoute.of(context).settings.arguments),
               child: RestoranDetailPage(),
+            ),
+        RestoranSearchPage.routeName: (context) =>
+            ChangeNotifierProvider<RestaurantSearchProvider>(
+              create: (_) => RestaurantSearchProvider(apiService: ApiService()),
+              child: RestoranSearchPage(),
             )
       },
     );
