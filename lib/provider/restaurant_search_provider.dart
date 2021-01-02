@@ -7,10 +7,9 @@ import 'package:restoran_app_dicoding/data/model/restoran.dart';
 
 class RestaurantSearchProvider extends ChangeNotifier {
   final ApiService apiService;
+  String query;
 
-  RestaurantSearchProvider({@required this.apiService}) {
-    _fetchAllRestaurant();
-  }
+  RestaurantSearchProvider({@required this.apiService, @required this.query}) {}
 
   RestaurantsList _restaurantList;
   String _message = '';
@@ -22,11 +21,16 @@ class RestaurantSearchProvider extends ChangeNotifier {
 
   ResultState get state => _state;
 
+  loadRestaurantData(query) {
+    this.query = query;
+    _fetchAllRestaurant();
+  }
+
   Future<dynamic> _fetchAllRestaurant() async {
     try {
       _state = ResultState.Loading;
       notifyListeners();
-      final restaurant = await apiService.restaurantsList();
+      final restaurant = await apiService.restaurantsListSearch(query);
       if (restaurant.restaurants.isEmpty) {
         _state = ResultState.NoData;
         notifyListeners();

@@ -38,7 +38,8 @@ class MyApp extends StatelessWidget {
             ),
         RestoranSearchPage.routeName: (context) =>
             ChangeNotifierProvider<RestaurantSearchProvider>(
-              create: (_) => RestaurantSearchProvider(apiService: ApiService()),
+              create: (_) =>
+                  RestaurantSearchProvider(apiService: ApiService(), query: ''),
               child: RestoranSearchPage(),
             )
       },
