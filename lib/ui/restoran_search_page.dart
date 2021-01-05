@@ -13,40 +13,44 @@ class RestoranSearchPage extends StatelessWidget {
   TextEditingController _tvQuery = TextEditingController();
 
   Widget _buildList() {
-    return Consumer<RestaurantSearchProvider>(
-      builder: (context, state, _) {
-        if (state.state == ResultState.Loading) {
-          return Center(child: CircularProgressIndicator());
-        } else if (state.state == ResultState.HasData) {
-          return Column(
-            children: [
-              _tfSearchAndroid(context, state),
-              _listSearch(context, state)
-            ],
-          );
-        } else if (state.state == ResultState.NoData) {
-          return Center(
-              child: Column(
-            children: [
-              Icon(Icons.search, size: 46),
-              Text(state.message),
-            ],
-          ));
-        } else if (state.state == ResultState.Error) {
-          return Center(child: Text(state.message));
-        } else {
-          return Column(children: [
-            _tfSearchAndroid(context, state),
-            Expanded(
-                //makes the red row full width
-                child: Center(
-                    child: Icon(
-              Icons.search,
-              size: 46,
-            )))
-          ]);
-        }
-      },
+    return Column(
+      children: [
+        Consumer<RestaurantSearchProvider>(
+          builder: (context, state, _) {
+            if (state.state == ResultState.Loading) {
+              return Center(child: CircularProgressIndicator());
+            } else if (state.state == ResultState.HasData) {
+              return Column(
+                children: [
+                  _tfSearchAndroid(context, state),
+                  _listSearch(context, state)
+                ],
+              );
+            } else if (state.state == ResultState.NoData) {
+              return Center(
+                  child: Column(
+                children: [
+                  Icon(Icons.search, size: 46),
+                  Text(state.message),
+                ],
+              ));
+            } else if (state.state == ResultState.Error) {
+              return Center(child: Text(state.message));
+            } else {
+              return Column(children: [
+                _tfSearchAndroid(context, state),
+                Expanded(
+                    //makes the red row full width
+                    child: Center(
+                        child: Icon(
+                  Icons.search,
+                  size: 46,
+                )))
+              ]);
+            }
+          },
+        ),
+      ],
     );
   }
 
