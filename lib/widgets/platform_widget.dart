@@ -13,7 +13,7 @@ class PlatformWidget extends StatelessWidget {
       case TargetPlatform.android:
         return androidBuilder(context);
       case TargetPlatform.iOS:
-        return iosBuilder(context);
+        return androidBuilder(context);
       default:
         return androidBuilder(context);
     }

@@ -21,7 +21,7 @@ class RestoranDetailPage extends StatelessWidget {
         } else if (state.state == ResultState.Error) {
           return Center(child: Text(state.message));
         } else {
-          return Center(child: Text(''));
+          return Center(child: Text(state.message));
         }
       },
     );
