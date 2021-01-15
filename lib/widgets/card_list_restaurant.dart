@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:restoran_app_dicoding/common/styles.dart';
 import 'package:restoran_app_dicoding/data/api/api_service.dart';
 import 'package:restoran_app_dicoding/data/model/restoran.dart';
-import 'package:restoran_app_dicoding/ui/detail_restoran_page.dart';
+import 'package:restoran_app_dicoding/ui/detail_restaurant_page.dart';
 
 class CardListRestaurant extends StatelessWidget {
-  final Restoran restoran;
+  final Restaurant restoran;
 
   const CardListRestaurant({Key key, @required this.restoran})
       : super(key: key);
@@ -68,7 +68,7 @@ class CardListRestaurant extends StatelessWidget {
         ]),
         onTap: () => Navigator.pushNamed(
           context,
-          RestoranDetailPage.routeName,
+          RestaurantDetailPage.routeName,
           arguments: restoran.id,
         ),
       ),

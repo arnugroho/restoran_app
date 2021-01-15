@@ -6,7 +6,7 @@ import 'package:restoran_app_dicoding/provider/restaurant_detail_provider.dart';
 import 'package:restoran_app_dicoding/widgets/detail_restaurant.dart';
 import 'package:restoran_app_dicoding/widgets/platform_widget.dart';
 
-class RestoranDetailPage extends StatelessWidget {
+class RestaurantDetailPage extends StatelessWidget {
   static const routeName = '/restaurant_detail';
 
   Widget _buildList() {

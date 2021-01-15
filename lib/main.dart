@@ -5,9 +5,9 @@ import 'package:restoran_app_dicoding/data/api/api_service.dart';
 import 'package:restoran_app_dicoding/provider/restaurant_detail_provider.dart';
 import 'package:restoran_app_dicoding/provider/restaurant_search_provider.dart';
 import 'package:restoran_app_dicoding/splash.dart';
-import 'package:restoran_app_dicoding/ui/detail_restoran_page.dart';
-import 'package:restoran_app_dicoding/ui/restoran_list_page.dart';
-import 'package:restoran_app_dicoding/ui/restoran_search_page.dart';
+import 'package:restoran_app_dicoding/ui/detail_restaurant_page.dart';
+import 'package:restoran_app_dicoding/ui/restaurant_list_page.dart';
+import 'package:restoran_app_dicoding/ui/restaurant_search_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,19 +22,19 @@ class MyApp extends StatelessWidget {
       initialRoute: SplashScreen.routeName,
       routes: {
         SplashScreen.routeName: (context) => SplashScreen(),
-        RestoranListPage.routeName: (context) => RestoranListPage(),
-        RestoranDetailPage.routeName: (context) =>
+        RestaurantListPage.routeName: (context) => RestaurantListPage(),
+        RestaurantDetailPage.routeName: (context) =>
             ChangeNotifierProvider<RestaurantDetailProvider>(
               create: (_) => RestaurantDetailProvider(
                   apiService: ApiService(),
                   idRestaurant: ModalRoute.of(context).settings.arguments),
-              child: RestoranDetailPage(),
+              child: RestaurantDetailPage(),
             ),
-        RestoranSearchPage.routeName: (context) =>
+        RestaurantSearchPage.routeName: (context) =>
             ChangeNotifierProvider<RestaurantSearchProvider>(
               create: (_) =>
                   RestaurantSearchProvider(apiService: ApiService(), query: ''),
-              child: RestoranSearchPage(),
+              child: RestaurantSearchPage(),
             )
       },
     );

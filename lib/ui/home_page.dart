@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restoran_app_dicoding/data/api/api_service.dart';
 import 'package:restoran_app_dicoding/provider/restaurant_provider.dart';
-import 'package:restoran_app_dicoding/ui/restoran_list_page.dart';
+import 'package:restoran_app_dicoding/ui/restaurant_list_page.dart';
 import 'package:restoran_app_dicoding/ui/settings_page.dart';
 import 'package:restoran_app_dicoding/widgets/platform_widget.dart';
 
@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _listWidget = [
     ChangeNotifierProvider<RestaurantProvider>(
       create: (_) => RestaurantProvider(apiService: ApiService()),
-      child: RestoranListPage(),
+      child: RestaurantListPage(),
     ),
     SettingsPage(),
   ];
@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   List<BottomNavigationBarItem> _bottomNavBarItems = [
     BottomNavigationBarItem(
       icon: Icon(Platform.isIOS ? CupertinoIcons.home : Icons.home),
-      label: RestoranListPage.title,
+      label: RestaurantListPage.title,
     ),
     BottomNavigationBarItem(
       icon: Icon(Platform.isIOS ? CupertinoIcons.settings : Icons.settings),

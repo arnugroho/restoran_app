@@ -5,7 +5,7 @@ import 'package:restoran_app_dicoding/data/model/name_value.dart';
 import 'package:restoran_app_dicoding/data/model/restoran.dart';
 
 class DetailRestaurantWidget extends StatelessWidget {
-  final Restoran restoran;
+  final Restaurant restoran;
 
   const DetailRestaurantWidget({Key key, @required this.restoran})
       : super(key: key);

@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restoran_app_dicoding/common/enum_data.dart';
 import 'package:restoran_app_dicoding/provider/restaurant_provider.dart';
-import 'package:restoran_app_dicoding/ui/restoran_search_page.dart';
+import 'package:restoran_app_dicoding/ui/restaurant_search_page.dart';
 import 'package:restoran_app_dicoding/widgets/card_list_restaurant.dart';
 import 'package:restoran_app_dicoding/widgets/platform_widget.dart';
 
-class RestoranListPage extends StatelessWidget {
+class RestaurantListPage extends StatelessWidget {
   static const String title = 'List';
   static const routeName = '/restoran_list';
 
@@ -23,7 +23,7 @@ class RestoranListPage extends StatelessWidget {
             children: [
               TextButton.icon(
                 onPressed: () {
-                  Navigator.pushNamed(context, RestoranSearchPage.routeName);
+                  Navigator.pushNamed(context, RestaurantSearchPage.routeName);
                 },
                 icon:
                     Icon(Platform.isIOS ? CupertinoIcons.search : Icons.search),

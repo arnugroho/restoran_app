@@ -52,10 +52,10 @@ class _SplashScreenState extends State<SplashScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Image.asset(
-                            'assets/images/restoran_splash.jpeg',
-                            height: 300,
-                            width: 300,
-                          ),
+                            'assets/images/restaurant_splash.jpeg',
+                        height: 300,
+                        width: 300,
+                      ),
                           Padding(
                             padding: const EdgeInsets.only(top: 10.0),
                           ),
