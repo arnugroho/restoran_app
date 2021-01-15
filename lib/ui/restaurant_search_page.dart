@@ -10,7 +10,7 @@ import 'package:restoran_app_dicoding/widgets/platform_widget.dart';
 class RestaurantSearchPage extends StatelessWidget {
   static const String title = 'Search Restaurant';
   static const routeName = '/restoran_search';
-  TextEditingController _tvQuery = TextEditingController();
+  final TextEditingController _tvQuery = TextEditingController();
 
   Widget _buildList() {
     return Consumer<RestaurantSearchProvider>(
