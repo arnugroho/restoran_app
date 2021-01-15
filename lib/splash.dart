@@ -14,9 +14,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-  String _versionName = 'V1.0';
-  final splashDelay = 3;
+  final _versionName = 'V1.0';
+  final _splashDelay = 3;
 
   @override
   void initState() {
@@ -26,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _loadWidget() async {
-    var _duration = Duration(seconds: splashDelay);
+    var _duration = Duration(seconds: _splashDelay);
     return Timer(_duration, navigationPage);
   }
 
