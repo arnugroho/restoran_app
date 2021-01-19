@@ -27,6 +27,15 @@ class Restaurant {
         ? Menus.fromJson(restaurant['menus'])
         : null;
   }
+
+  Map<String, dynamic> toJson() => {
+        "id": id == null ? null : id,
+        "name": name,
+        "description": description == null ? null : description,
+        "pictureId": pictureId == null ? null : pictureId,
+        "city": city == null ? null : city,
+        "rating": rating == null ? null : rating,
+      };
 }
 
 List<Restaurant> parseArticles(String json) {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:restoran_app_dicoding/common/styles.dart';
 import 'package:restoran_app_dicoding/data/api/api_service.dart';
 import 'package:restoran_app_dicoding/data/model/name_value.dart';
-import 'package:restoran_app_dicoding/data/model/restoran.dart';
+import 'package:restoran_app_dicoding/data/model/restaurant.dart';
 
 class DetailRestaurantWidget extends StatelessWidget {
   final Restaurant restoran;

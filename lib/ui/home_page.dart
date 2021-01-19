@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restoran_app_dicoding/data/api/api_service.dart';
 import 'package:restoran_app_dicoding/provider/restaurant_provider.dart';
+import 'package:restoran_app_dicoding/ui/bookmarks_page.dart';
 import 'package:restoran_app_dicoding/ui/restaurant_list_page.dart';
 import 'package:restoran_app_dicoding/ui/settings_page.dart';
 import 'package:restoran_app_dicoding/widgets/platform_widget.dart';
@@ -24,6 +25,7 @@ class _HomePageState extends State<HomePage> {
       create: (_) => RestaurantProvider(apiService: ApiService()),
       child: RestaurantListPage(),
     ),
+    BookmarksPage(),
     SettingsPage(),
   ];
 
@@ -31,6 +33,12 @@ class _HomePageState extends State<HomePage> {
     BottomNavigationBarItem(
       icon: Icon(Platform.isIOS ? CupertinoIcons.home : Icons.home),
       label: RestaurantListPage.title,
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Platform.isIOS
+          ? CupertinoIcons.bookmark
+          : Icons.collections_bookmark),
+      label: BookmarksPage.bookmarksTitle,
     ),
     BottomNavigationBarItem(
       icon: Icon(Platform.isIOS ? CupertinoIcons.settings : Icons.settings),

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:restoran_app_dicoding/common/enum_data.dart';
 import 'package:restoran_app_dicoding/data/api/api_service.dart';
-import 'package:restoran_app_dicoding/data/model/restoran.dart';
+import 'package:restoran_app_dicoding/data/model/restaurant.dart';
 
 class RestaurantProvider extends ChangeNotifier {
   final ApiService apiService;
