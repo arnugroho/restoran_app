@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restoran_app_dicoding/provider/preferences_provider.dart';
+import 'package:restoran_app_dicoding/provider/scheduling_provider.dart';
+import 'package:restoran_app_dicoding/widgets/custom_dialog.dart';
 import 'package:restoran_app_dicoding/widgets/platform_widget.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -41,26 +45,26 @@ class SettingsPage extends StatelessWidget {
                 ),
               ),
             ),
-            // Material(
-            //   child: ListTile(
-            //     title: Text('Scheduling News'),
-            //     trailing: Consumer<SchedulingProvider>(
-            //       builder: (context, scheduled, _) {
-            //         return Switch.adaptive(
-            //           value: provider.isDailyNewsActive,
-            //           onChanged: (value) async {
-            //             if (Platform.isIOS) {
-            //               customDialog(context);
-            //             } else {
-            //               scheduled.scheduledNews(value);
-            //               provider.enableDailyNews(value);
-            //             }
-            //           },
-            //         );
-            //       },
-            //     ),
-            //   ),
-            // ),
+            Material(
+              child: ListTile(
+                title: Text('Scheduling Restaurant'),
+                trailing: Consumer<SchedulingProvider>(
+                  builder: (context, scheduled, _) {
+                    return Switch.adaptive(
+                      value: provider.isDailyNewsActive,
+                      onChanged: (value) async {
+                        if (Platform.isIOS) {
+                          customDialog(context);
+                        } else {
+                          scheduled.scheduledNews(value);
+                          provider.enableDailyNews(value);
+                        }
+                      },
+                    );
+                  },
+                ),
+              ),
+            ),
           ],
         );
       },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:restoran_app_dicoding/data/api/api_service.dart';
 import 'package:restoran_app_dicoding/data/db/database_helper.dart';
@@ -7,11 +8,15 @@ import 'package:restoran_app_dicoding/provider/database_provider.dart';
 import 'package:restoran_app_dicoding/provider/preferences_provider.dart';
 import 'package:restoran_app_dicoding/provider/restaurant_detail_provider.dart';
 import 'package:restoran_app_dicoding/provider/restaurant_search_provider.dart';
+import 'package:restoran_app_dicoding/provider/scheduling_provider.dart';
 import 'package:restoran_app_dicoding/splash.dart';
 import 'package:restoran_app_dicoding/ui/detail_restaurant_page.dart';
 import 'package:restoran_app_dicoding/ui/restaurant_list_page.dart';
 import 'package:restoran_app_dicoding/ui/restaurant_search_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 void main() {
   runApp(MyApp());
@@ -22,6 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => SchedulingProvider()),
         ChangeNotifierProvider(
           create: (_) => PreferencesProvider(
             preferencesHelper: PreferencesHelper(
