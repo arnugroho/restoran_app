@@ -9,7 +9,7 @@ class RestaurantSearchProvider extends ChangeNotifier {
   final ApiService apiService;
   String query;
 
-  RestaurantSearchProvider({@required this.apiService, @required this.query}) {}
+  RestaurantSearchProvider({@required this.apiService, @required this.query});
 
   RestaurantsList _restaurantList;
   String _message = '';
