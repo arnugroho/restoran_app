@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:restoran_app_dicoding/common/navigation.dart';
@@ -9,6 +10,7 @@ final selectNotificationSubject = BehaviorSubject<String>();
 
 class NotificationHelper {
   static NotificationHelper _instance;
+  int idx = Random().nextInt(20);
 
   NotificationHelper._internal() {
     _instance = this;
@@ -58,7 +60,7 @@ class NotificationHelper {
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
 
     var titleNotification = "<b>Best Restaurant</b>";
-    var titleRestaurant = restaurantsList.restaurants[0].name;
+    var titleRestaurant = restaurantsList.restaurants[idx].name;
 
     await flutterLocalNotificationsPlugin.show(
         0, titleNotification, titleRestaurant, platformChannelSpecifics,
@@ -69,7 +71,7 @@ class NotificationHelper {
     selectNotificationSubject.stream.listen(
       (String payload) async {
         var data = RestaurantsList.fromJson(json.decode(payload));
-        var restaurant = data.restaurants[0];
+        var restaurant = data.restaurants[idx];
         Navigation.intentWithData(route, restaurant);
       },
     );
