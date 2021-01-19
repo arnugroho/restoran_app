@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:restoran_app_dicoding/provider/preferences_provider.dart';
 import 'package:restoran_app_dicoding/widgets/platform_widget.dart';
 
 class SettingsPage extends StatelessWidget {
-  static const String title = 'Settings';
+  static const String settingsTitle = 'Settings';
 
   Widget _buildAndroid(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(settingsTitle),
       ),
       body: _buildList(context),
     );
@@ -18,62 +19,51 @@ class SettingsPage extends StatelessWidget {
   Widget _buildIos(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: Text(title),
+        middle: Text(settingsTitle),
       ),
       child: _buildList(context),
     );
   }
 
   Widget _buildList(BuildContext context) {
-    return ListView(
-      children: [
-        Material(
-          child: ListTile(
-            title: Text('Dark Theme'),
-            trailing: Switch.adaptive(
-              value: false,
-              onChanged: (value) {
-                defaultTargetPlatform == TargetPlatform.iOS
-                    ? showCupertinoDialog(
-                        context: context,
-                        barrierDismissible: true,
-                        builder: (context) {
-                          return CupertinoAlertDialog(
-                            title: Text('Coming Soon!'),
-                            content: Text('This feature will be coming soon!'),
-                            actions: [
-                              CupertinoDialogAction(
-                                child: Text('Ok'),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      )
-                    : showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: Text('Coming Soon!'),
-                            content: Text('This feature will be coming soon!'),
-                            actions: [
-                              FlatButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Text('Ok'),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-              },
+    return Consumer<PreferencesProvider>(
+      builder: (context, provider, child) {
+        return ListView(
+          children: [
+            Material(
+              child: ListTile(
+                title: Text('Dark Theme'),
+                trailing: Switch.adaptive(
+                  value: provider.isDarkTheme,
+                  onChanged: (value) {
+                    provider.enableDarkTheme(value);
+                  },
+                ),
+              ),
             ),
-          ),
-        ),
-      ],
+            // Material(
+            //   child: ListTile(
+            //     title: Text('Scheduling News'),
+            //     trailing: Consumer<SchedulingProvider>(
+            //       builder: (context, scheduled, _) {
+            //         return Switch.adaptive(
+            //           value: provider.isDailyNewsActive,
+            //           onChanged: (value) async {
+            //             if (Platform.isIOS) {
+            //               customDialog(context);
+            //             } else {
+            //               scheduled.scheduledNews(value);
+            //               provider.enableDailyNews(value);
+            //             }
+            //           },
+            //         );
+            //       },
+            //     ),
+            //   ),
+            // ),
+          ],
+        );
+      },
     );
   }
 

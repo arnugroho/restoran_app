@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
     ),
     BottomNavigationBarItem(
       icon: Icon(Platform.isIOS ? CupertinoIcons.settings : Icons.settings),
-      label: SettingsPage.title,
+      label: SettingsPage.settingsTitle,
     ),
   ];
 

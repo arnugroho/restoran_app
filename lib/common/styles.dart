@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 final Color primaryColor = Color(0xFFFFFFFF);
 final Color secondaryColor = Color(0xFF6B38FB);
+final Color darkPrimaryColor = Color(0xFF000000);
+final Color darkSecondaryColor = Color(0xff64ffda);
 
 final TextTheme myTextTheme = TextTheme(
   headline1: GoogleFonts.merriweather(
@@ -133,3 +135,52 @@ const Color shrineSurfaceWhite = Color(0xFFFFFBFA);
 const Color shrineBackgroundWhite = Colors.white;
 
 const defaultLetterSpacing = 0.03;
+
+ThemeData lightTheme = ThemeData(
+  primaryColor: primaryColor,
+  accentColor: secondaryColor,
+  scaffoldBackgroundColor: Colors.white,
+  visualDensity: VisualDensity.adaptivePlatformDensity,
+  textTheme: myTextTheme,
+  appBarTheme: AppBarTheme(
+    textTheme: myTextTheme.apply(bodyColor: Colors.black),
+    elevation: 0,
+  ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    selectedItemColor: secondaryColor,
+    unselectedItemColor: Colors.grey,
+  ),
+  buttonTheme: ButtonThemeData(
+    buttonColor: secondaryColor,
+    textTheme: ButtonTextTheme.primary,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(0),
+      ),
+    ),
+  ),
+);
+
+ThemeData darkTheme = ThemeData.dark().copyWith(
+  primaryColor: darkPrimaryColor,
+  accentColor: darkSecondaryColor,
+  visualDensity: VisualDensity.adaptivePlatformDensity,
+  textTheme: myTextTheme,
+  appBarTheme: AppBarTheme(
+    textTheme: myTextTheme.apply(bodyColor: Colors.white),
+    elevation: 0,
+  ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    selectedItemColor: darkSecondaryColor,
+    unselectedItemColor: Colors.grey,
+  ),
+  buttonTheme: ButtonThemeData(
+    buttonColor: darkSecondaryColor,
+    textTheme: ButtonTextTheme.primary,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(0),
+      ),
+    ),
+  ),
+);
