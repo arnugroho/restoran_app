@@ -8,6 +8,7 @@ import 'package:restoran_app_dicoding/provider/restaurant_provider.dart';
 import 'package:restoran_app_dicoding/ui/bookmarks_page.dart';
 import 'package:restoran_app_dicoding/ui/restaurant_list_page.dart';
 import 'package:restoran_app_dicoding/ui/settings_page.dart';
+import 'package:restoran_app_dicoding/utils/background_service.dart';
 import 'package:restoran_app_dicoding/widgets/platform_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,6 +20,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _bottomNavIndex = 0;
+
+  final BackgroundService _service = BackgroundService();
+
+  @override
+  void initState() {
+    super.initState();
+    port.listen((_) async => await _service.someTask());
+  }
 
   List<Widget> _listWidget = [
     ChangeNotifierProvider<RestaurantProvider>(
